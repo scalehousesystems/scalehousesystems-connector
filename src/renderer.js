@@ -199,5 +199,28 @@ document.getElementById('configForm').addEventListener('submit', async (e) => {
   await saveConfig();
 });
 
-// Auto-update status every 2 seconds
-setInterval(updateStatus, 2000);
+// Auto-update status every 2 seconds when window is visible
+let statusUpdateInterval = null;
+
+function startStatusUpdates() {
+  if (!statusUpdateInterval) {
+    statusUpdateInterval = setInterval(updateStatus, 2000);
+  }
+}
+
+function stopStatusUpdates() {
+  if (statusUpdateInterval) {
+    clearInterval(statusUpdateInterval);
+    statusUpdateInterval = null;
+  }
+}
+
+// Start updates when window loads
+window.addEventListener('DOMContentLoaded', () => {
+  startStatusUpdates();
+});
+
+// Stop updates when window is about to close
+window.addEventListener('beforeunload', () => {
+  stopStatusUpdates();
+});

@@ -32,7 +32,7 @@ class OpenDentalConnector {
       // Verify we can query the audit view
       const viewName = config.auditView || 'audit_log_view';
       const [rows] = await testConnection.query(
-        `SELECT COUNT(*) as count FROM ${mysql.escapeId(viewName)} LIMIT 1`
+        `SELECT COUNT(*) as count FROM ${mysql.escapeId(viewName)}`
       );
 
       await testConnection.end();

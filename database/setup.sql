@@ -43,15 +43,23 @@ SET @audit_view = 'audit_log_view';
 -- This view exposes only the audit log fields needed for compliance tracking
 -- without exposing PHI (Protected Health Information)
 
-USE opendental;
+-- Switch to the configured database
+SET @use_db = CONCAT('USE ', @db_name);
+PREPARE stmt FROM @use_db;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 -- Drop existing view if it exists
-DROP VIEW IF EXISTS audit_log_view;
+SET @drop_view = CONCAT('DROP VIEW IF EXISTS ', @audit_view);
+PREPARE stmt FROM @drop_view;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 -- Create the audit view
 -- IMPORTANT: This assumes OpenDental's securitylog table structure
 -- Adjust column names if your OpenDental version differs
-CREATE VIEW audit_log_view AS
+SET @create_view = CONCAT('
+CREATE VIEW ', @audit_view, ' AS
 SELECT 
     sl.SecurityLogNum AS AuditLogNum,
     sl.PatNum,
@@ -63,12 +71,17 @@ SELECT
     sl.LogSource
 FROM securitylog sl
 WHERE sl.SecurityLogNum > 0
-ORDER BY sl.SecurityLogNum;
+ORDER BY sl.SecurityLogNum
+');
+PREPARE stmt FROM @create_view;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 -- Verify the view was created
-SELECT 'Audit view created successfully' AS Status,
-       COUNT(*) AS RecordCount 
-FROM audit_log_view;
+SET @verify_view = CONCAT('SELECT ''Audit view created successfully'' AS Status, COUNT(*) AS RecordCount FROM ', @audit_view);
+PREPARE stmt FROM @verify_view;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 -- ---------------------------------------------------------------------------
 -- STEP 2: Create the Connector User

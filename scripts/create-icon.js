@@ -5,6 +5,11 @@ const path = require('path');
 async function createIcon() {
   const buildDir = path.join(__dirname, '../build');
   
+  // Ensure build directory exists
+  if (!fs.existsSync(buildDir)) {
+    fs.mkdirSync(buildDir, { recursive: true });
+  }
+  
   // Create a simple gradient image with "SH" text
   const svg = `
     <svg width="256" height="256" xmlns="http://www.w3.org/2000/svg">

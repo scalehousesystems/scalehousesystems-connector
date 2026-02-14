@@ -118,9 +118,17 @@ app.on('window-all-closed', (event) => {
   event.preventDefault();
 });
 
-app.on('before-quit', () => {
-  isQuitting = true;
-  connector.stop();
+ipcMain.handle('stop-connector', async () => {
+  try {
+    connector.stop();
+    return { success: true, message: 'Connector stopped successfully' };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+});
+
+ipcMain.handle('get-status', async () => {
+  return connector.getStatus();
 });
 
 // IPC handlers for renderer process
@@ -178,8 +186,20 @@ ipcMain.handle('get-status', async () => {
 });
 
 // Send status updates to renderer
-setInterval(() => {
+let statusUpdateInterval = setInterval(() => {
   if (mainWindow && !mainWindow.isDestroyed()) {
     mainWindow.webContents.send('status-update', connector.getStatus());
   }
 }, 2000);
+
+app.on('before-quit', () => {
+  isQuitting = true;
+  
+  // Clean up status update interval
+  if (statusUpdateInterval) {
+    clearInterval(statusUpdateInterval);
+    statusUpdateInterval = null;
+  }
+  
+  connector.stop();
+});

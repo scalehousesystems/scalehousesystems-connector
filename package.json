@@ -11,7 +11,6 @@
     "dev": "electron . --dev",
     "build": "npm run icon && electron-builder --win --x64",
     "build:msi": "npm run icon && electron-builder --win msi --x64",
-    "build:all": "npm run icon && electron-builder --win --x64",
     "icon": "node scripts/create-icon.js"
   },
   "build": {
