@@ -9,9 +9,10 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
-    "build": "electron-builder --win --x64",
-    "build:msi": "electron-builder --win msi --x64",
-    "build:all": "electron-builder --win --x64"
+    "build": "npm run icon && electron-builder --win --x64",
+    "build:msi": "npm run icon && electron-builder --win msi --x64",
+    "build:all": "npm run icon && electron-builder --win --x64",
+    "icon": "node scripts/create-icon.js"
   },
   "build": {
     "appId": "com.scalehouse.connector",
@@ -34,11 +35,10 @@
       "output": "build-output",
       "buildResources": "build"
     },
-   "files": [
-  "src/main.js",
-  "package.json"
-]
-,
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
     "extraResources": [
       {
         "from": "build/icon.ico",
@@ -53,6 +53,8 @@
   },
   "devDependencies": {
     "electron": "^33.2.1",
-    "electron-builder": "^25.1.8"
+    "electron-builder": "^25.1.8",
+    "png-to-ico": "^3.0.1",
+    "sharp": "^0.34.5"
   }
 }
