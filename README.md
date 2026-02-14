@@ -1,20 +1,57 @@
-# ScaleHouse Connector
+# ScaleHouse Connector - OpenDental MySQL Integration
 
-Windows desktop application that syncs Open Dental audit events to ScaleHouse compliance platform.
+Windows desktop application that syncs OpenDental audit events to ScaleHouse compliance platform.
+
+## 🔒 Security-First Design
+
+This connector implements **least-privilege access control**:
+- Uses a dedicated MySQL user with **SELECT-only** permissions
+- Access restricted to a single audit view (no PHI tables)
+- Database engine enforces security - even if compromised, MySQL rejects unauthorized queries
+- Industry-standard enterprise security pattern
+
+## ✨ Features
+
+- 🖥️ **Modern GUI**: Easy-to-use configuration interface
+- 🔐 **Secure**: SELECT-only MySQL permissions, encrypted API communication
+- 📊 **Real-time Monitoring**: Live status dashboard with sync statistics
+- 🔄 **Automatic Sync**: Configurable polling interval for audit events
+- 🎯 **System Tray Integration**: Runs in background, accessible from tray icon
+- 📦 **MSI Installer**: Professional Windows installer with auto-update support
+- ⚡ **Efficient**: Batch processing with configurable sync intervals
 
 ## 📁 Project Structure
 
 ```
 /scalehouse-connector
   /src
-    main.js        # Electron main process
-    connector.js   # Database polling logic
-    api.js         # API calls to ScaleHouse
+    main.js        # Electron main process with system tray
+    connector.js   # MySQL database polling logic (SELECT-only)
+    api.js         # API calls to ScaleHouse platform
+    renderer.js    # GUI event handlers
+    index.html     # Configuration interface
   /build
     icon.ico       # Windows installer icon
+    icon.png       # PNG versions at multiple sizes
+  /scripts
+    create-icon.js # Icon generation script
   package.json     # Dependencies and build config
   .env.example     # Environment variables template
+  SETUP.md         # Detailed setup and security guide
 ```
+
+## 🚀 Quick Start
+
+### For End Users
+
+1. **Download** the MSI installer from your ScaleHouse admin panel
+2. **Install** by running the MSI as Administrator
+3. **Configure** the connector with your database and API credentials
+4. **Start** syncing audit events to ScaleHouse
+
+See [SETUP.md](SETUP.md) for detailed setup instructions including MySQL user creation and security configuration.
+
+### For Developers
 
 ## 🚀 Setup
 
@@ -39,6 +76,24 @@ If you don't have one, download a placeholder:
 ```bash
 npm run dev
 ```
+
+## 📚 Documentation
+
+### For End Users
+- **[QUICKSTART.md](QUICKSTART.md)** - Quick reference card for installation and daily use
+- **[UI_PREVIEW.md](UI_PREVIEW.md)** - Visual preview of the interface
+
+### For IT Staff & DBAs
+- **[SETUP.md](SETUP.md)** - Comprehensive setup guide with security best practices
+- **[database/setup.sql](database/setup.sql)** - Automated MySQL user and view setup script
+
+### For Developers
+- **[BUILD.md](BUILD.md)** - Build instructions and MSI creation guide
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System architecture, security model, and deployment patterns
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Complete implementation details
+
+### Configuration
+- **[.env.example](.env.example)** - Configuration template with examples
 
 ## 🔨 Build MSI Installer
 
