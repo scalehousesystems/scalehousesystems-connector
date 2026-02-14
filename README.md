@@ -77,6 +77,24 @@ If you don't have one, download a placeholder:
 npm run dev
 ```
 
+## 📚 Documentation
+
+### For End Users
+- **[QUICKSTART.md](QUICKSTART.md)** - Quick reference card for installation and daily use
+- **[UI_PREVIEW.md](UI_PREVIEW.md)** - Visual preview of the interface
+
+### For IT Staff & DBAs
+- **[SETUP.md](SETUP.md)** - Comprehensive setup guide with security best practices
+- **[database/setup.sql](database/setup.sql)** - Automated MySQL user and view setup script
+
+### For Developers
+- **[BUILD.md](BUILD.md)** - Build instructions and MSI creation guide
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System architecture, security model, and deployment patterns
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Complete implementation details
+
+### Configuration
+- **[.env.example](.env.example)** - Configuration template with examples
+
 ## 🔨 Build MSI Installer
 
 ### Build for Windows
