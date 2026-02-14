@@ -1,0 +1,58 @@
+{
+  "name": "scalehouse-connector",
+  "version": "1.0.0",
+  "description": "ScaleHouse Connector - Syncs Open Dental audit data to ScaleHouse compliance platform",
+  "main": "src/main.js",
+  "author": "ScaleHouse Systems",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --win --x64",
+    "build:msi": "electron-builder --win msi --x64",
+    "build:all": "electron-builder --win --x64"
+  },
+  "build": {
+    "appId": "com.scalehouse.connector",
+    "productName": "ScaleHouse Connector",
+    "copyright": "Copyright © 2025 ScaleHouse Systems",
+    "win": {
+      "target": "msi",
+      "icon": "build/icon.ico",
+      "requestedExecutionLevel": "requireAdministrator",
+      "publisherName": "ScaleHouse Systems"
+    },
+    "msi": {
+      "oneClick": false,
+      "perMachine": true,
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "directories": {
+      "output": "build-output",
+      "buildResources": "build"
+    },
+   "files": [
+  "src/main.js",
+  "package.json"
+]
+,
+    "extraResources": [
+      {
+        "from": "build/icon.ico",
+        "to": "icon.ico"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-store": "^8.2.0",
+    "mysql2": "^3.11.5",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  }
+}
