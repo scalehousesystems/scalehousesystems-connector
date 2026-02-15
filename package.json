@@ -34,10 +34,10 @@
       "output": "build-output",
       "buildResources": "build"
     },
-   "files": [
-  "src/main.js",
-  "package.json"
-]
+    "files": [
+      "src/**/*",
+      "package.json"
+    ]
 ,
     "extraResources": [
       {
