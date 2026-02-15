@@ -4,6 +4,8 @@ const fs = require('fs').promises;
 const path = require('path');
 const { app } = require('electron');
 
+const DEFAULT_SYNC_START_DATE = '2020-01-01';
+
 class Connector {
   constructor(config) {
     this.config = config;
@@ -46,12 +48,12 @@ class Connector {
     }
   }
 
-  stop() {
+  async stop() {
     if (!this.isRunning) {
       return;
     }
 
-    this.log('Connector stopping...');
+    await this.log('Connector stopping...');
     
     if (this.pollInterval) {
       clearInterval(this.pollInterval);
@@ -112,7 +114,7 @@ class Connector {
       `;
 
       const [rows] = await this.connection.execute(query, [
-        this.lastSyncTime || new Date('2020-01-01')
+        this.lastSyncTime || new Date(DEFAULT_SYNC_START_DATE)
       ]);
 
       if (rows.length === 0) {
@@ -159,8 +161,8 @@ class Connector {
       await this.log(`Last sync time loaded: ${this.lastSyncTime.toISOString()}`);
     } catch (error) {
       // File doesn't exist, start from beginning
-      this.lastSyncTime = new Date('2020-01-01');
-      await this.log('No previous sync time found, starting from 2020-01-01');
+      this.lastSyncTime = new Date(DEFAULT_SYNC_START_DATE);
+      await this.log(`No previous sync time found, starting from ${DEFAULT_SYNC_START_DATE}`);
     }
   }
 

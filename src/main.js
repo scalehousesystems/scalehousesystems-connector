@@ -38,9 +38,9 @@ app.whenReady().then(() => {
   }
 });
 
-app.on('window-all-closed', (e) => {
+app.on('window-all-closed', () => {
   // Keep app running in system tray
-  e.preventDefault();
+  // Don't call app.quit() to keep running in background
 });
 
 function createTray() {
