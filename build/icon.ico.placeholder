@@ -1,0 +1,16 @@
+This is a placeholder for the Windows icon file.
+
+To use the ScaleHouse Connector, you need to:
+1. Create a 256x256 pixel .ico file with your ScaleHouse logo
+2. Replace this file with the actual icon.ico file
+
+You can create .ico files using:
+- Online tools like favicon.io or icoconvert.com
+- Image editing software like GIMP or Photoshop
+- Windows built-in icon editor
+
+The icon will be displayed in:
+- System tray
+- Application window
+- MSI installer
+- Installed application shortcuts
