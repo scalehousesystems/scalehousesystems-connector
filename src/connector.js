@@ -246,8 +246,7 @@ class OpenDentalConnector {
     ];
 
     const [tables] = await this.connection.execute(
-      'SHOW TABLES LIKE ?',
-      ['%']
+      'SHOW TABLES'
     );
 
     const availableTables = tables.map(row => Object.values(row)[0]);

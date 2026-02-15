@@ -269,9 +269,10 @@ app.whenReady().then(() => {
   initializeApp();
 });
 
-app.on('window-all-closed', (e) => {
+app.on('window-all-closed', () => {
   // Don't quit when all windows are closed (run in background)
-  e.preventDefault();
+  // On Windows/Linux, keep running in system tray
+  // No action needed - app stays running
 });
 
 app.on('before-quit', async () => {
