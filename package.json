@@ -35,7 +35,7 @@
       "buildResources": "build"
     },
    "files": [
-  "src/main.js",
+  "src/**/*",
   "package.json"
 ]
 ,
