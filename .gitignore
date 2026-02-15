@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build output
+build-output/
+dist/
+*.msi
+*.exe
+
+# Environment variables (contains secrets)
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+/tmp/
+*.tmp
+
+# Icon file (will be added manually)
+build/icon.ico

@@ -142,12 +142,31 @@ After building, test the MSI:
 5. Check database connection
 6. Verify events sync to your SaaS
 
+## 🔒 PHI Protection Guarantee
+
+**IMPORTANT: This connector NEVER accesses Protected Health Information (PHI)**
+
+The connector only queries these 5 OpenDental tables:
+- `securitylog` - User action audit trail (NO patient data)
+- `appointment` - Appointment status metadata only (NO patient names/medical info)
+- `loginattempt` - Login security events
+- `eservicelog` - System integration logs
+- `securityloghash` - Audit integrity hashes
+
+It NEVER accesses patient tables like:
+- `patient`, `patientnote`, `procedurelog`, `claim`, `medication`, `allergy`, etc.
+
+For complete details, see:
+- [PHI_PROTECTION.md](PHI_PROTECTION.md) - Full PHI protection policy
+- [DATABASE_FUNCTIONS.md](DATABASE_FUNCTIONS.md) - Technical specification of all database functions
+
 ## 📝 Notes
 
 - **File Size:** MSI will be ~45-50MB
 - **Code Signing:** For production, sign the MSI with a code signing certificate
 - **Version Bumps:** Update `version` in `package.json` before each build
 - **Database:** Connector needs network access to Open Dental MySQL database
+- **Security:** Use a read-only MySQL user with access ONLY to the 5 audit tables above
 
 ## 🐛 Troubleshooting
 
